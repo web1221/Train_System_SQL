@@ -10,14 +10,14 @@ class City
     returned_cities = DB.exec("SELECT * FROM cities;")
     cities = []
     returned_cities.each()do |city|
-      name = city.fetch("name")
-      id = city.fetch("id").to_i
-      cities.push(City.new({:name => name, :id => id}))
-    end
-    cities
+    name = city.fetch("name")
+    id = city.fetch("id").to_i
+    cities.push(City.new({:name => name, :id => id}))
   end
+  cities
+end
 
-  def save
+def save
   result = DB.exec("INSERT INTO cities (name) VALUES ('#{@name}') RETURNING id;")
   @id = result.first().fetch("id").to_i
 end
@@ -48,11 +48,16 @@ end
 
 def delete()
   DB.exec("DELETE FROM cities WHERE id = #{@id};")
+  DB.exec("DELETE FROM trains WHERE city_id = #{@id};")
 end
 
 def self.search(x)
   cities = self.all
   cities.select {|e| /#{x}/i.match? e.name}
+end
+
+def trains
+  Train.find_by_city(self.id)
 end
 
 
