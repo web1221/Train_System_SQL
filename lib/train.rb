@@ -10,7 +10,6 @@ class Train
     @city_id = attributes.fetch(:city_id)
   end
 
-
   def ==(train_to_compare)
     if train_to_compare != nil
       (self.destination() == train_to_compare.destination()) && (self.city_id() == train_to_compare.city_id())
@@ -83,8 +82,7 @@ class Train
   end
 
   def city
-  City.find(@city_id)
-end
-
+    City.find(@city_id)
+  end
 
 end

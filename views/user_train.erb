@@ -2,12 +2,12 @@
 <h2>Destination: <%= @train.destination %></h2>
 
 <form action="/user_cities/<%= @train.city.id %>/user_trains/<%= @train.id %>/ticket" method="post">
-<select name="user_time_input">
-  <option value=<%= @train.time %>> <%= @train.time %></option>
-  <option value=<%= @train.time2 %>> <%= @train.time2 %></option>
-  <option value=<%= @train.time3 %>> <%= @train.time3 %></option>
-</select>
-<button type="submit">Buy Ticket</button>
+  <select name="user_time_input">
+    <option value=<%= @train.time %>> <%= @train.time %></option>
+    <option value=<%= @train.time2 %>> <%= @train.time2 %></option>
+    <option value=<%= @train.time3 %>> <%= @train.time3 %></option>
+  </select>
+  <button type="submit">Buy Ticket</button>
 
 </form>
 

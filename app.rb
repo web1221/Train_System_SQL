@@ -46,8 +46,8 @@ get('/cities/:id') do
   if @city == nil
     erb(:go_back)
   else
-  erb(:city)
-end
+    erb(:city)
+  end
 end
 
 get('/user_cities/:id') do
@@ -55,8 +55,8 @@ get('/user_cities/:id') do
   if @city == nil
     erb(:go_back)
   else
-  erb(:user_city)
-end
+    erb(:user_city)
+  end
 end
 
 get('/cities/:id/edit') do
@@ -83,14 +83,6 @@ post('/cities/:id/trains') do
   train.save()
   erb(:city)
 end
-
-# get('/cities/:id/trains') do
-#   @city = City.find(params[:id].to_i())
-#   cities = City.all
-#   @train = Train.all
-#   binding.pry
-#   erb(:city)
-# end
 
 get('/cities/:id/trains/:train_id') do
   @train = Train.find(params[:train_id].to_i())
@@ -122,9 +114,6 @@ post('/user_cities/:id/user_trains/:train_id/ticket') do
   @train = Train.find(params[:train_id].to_i())
   erb(:ticket)
 end
-
-
-
 
 get("/destroy") do
   @city = City.clear

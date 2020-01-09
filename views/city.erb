@@ -2,13 +2,13 @@
 
 <h3>Trains:</h3>
 <% if @city.trains != [] %>
-  <ul>
-    <% @city.trains.each do |train| %>
-      <li><a href="/cities/<%= @city.id %>/trains/<%= train.id %>"><%= train.destination %></a></li>
-    <% end %>
-  </ul>
+<ul>
+  <% @city.trains.each do |train| %>
+  <li><a href="/cities/<%= @city.id %>/trains/<%= train.id %>"><%= train.destination %></a></li>
+  <% end %>
+</ul>
 <% else %>
-  <p>There are no trains listed for this city yet.</p>
+<p>There are no trains listed for this city yet.</p>
 <% end %>
 
 <h4>Add a train:</h4>

@@ -13,8 +13,8 @@
 <ul>
   <% @cities.each do |city| %>
   <li><a href="/user_cities/<%= city.id %>"><strong><%= city.name %></strong></li>
+    <% end %>
+  </ul>
+  <% else %>
+  <p>There are currently no cities to display.</p>
   <% end %>
-</ul>
-<% else %>
-<p>There are currently no cities to display.</p>
-<% end %>

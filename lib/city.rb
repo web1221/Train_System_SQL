@@ -64,5 +64,4 @@ def trains
   Train.find_by_city(self.id)
 end
 
-
 end
