@@ -4,7 +4,7 @@ class Train
   def initialize(attributes)
     @destination = attributes.fetch(:destination)
     @id = attributes.fetch(:id)
-    @time = attributes.fetch(:time)
+    @time = attributes.fetch(:time, nil) 
     @city_id = attributes.fetch(:city_id)
   end
 

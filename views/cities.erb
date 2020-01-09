@@ -6,7 +6,13 @@
   <button type="submit" class="btn btn-primary">Go!</button>
 </form>
 
-<h3><center>Available Records</center></h3>
+<!-- <form action="/cities">
+  <button type="submit" class="btn btn-primary">Home</button>
+</form> -->
+
+<a href="/cities">Show all cities</a>
+
+<h3><center>Available cities</center></h3>
 <% if @cities.any? %>
 <ul>
   <% @cities.each do |city| %>
