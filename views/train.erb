@@ -1,6 +1,7 @@
 <h2>Departing From: <%= @train.city.name %></h2>
 <h2>Destination: <%= @train.destination %></h2>
-<h3>Time: <%= @train.time %></h3>
+<h3>Time: <%= @train.time %>, <%= @train.time2 %>, <%= @train.time3 %> </h3>
+
 
 <form action="/cities/<%= @train.city.id %>/trains/<%= @train.id %>" method="post">
   <input name="_method" type="hidden" value="patch">

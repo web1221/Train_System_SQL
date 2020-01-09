@@ -9,8 +9,7 @@ require('pg')
 DB = PG.connect({:dbname => 'train_system'})
 
 get('/') do
-  @cities = City.all
-  erb(:cities)
+  erb(:home)
 end
 
 get("/cities") do
@@ -20,6 +19,15 @@ get("/cities") do
     @cities = City.all
   end
   erb(:cities)
+end
+
+get("/user_cities") do
+  if params["search"]
+    @cities = City.search(params[:search])
+  else
+    @cities = City.all
+  end
+  erb(:user_cities)
 end
 
 post('/cities') do
@@ -39,6 +47,15 @@ get('/cities/:id') do
     erb(:go_back)
   else
   erb(:city)
+end
+end
+
+get('/user_cities/:id') do
+  @city = City.find(params[:id].to_i())
+  if @city == nil
+    erb(:go_back)
+  else
+  erb(:user_city)
 end
 end
 
@@ -62,7 +79,7 @@ end
 
 post('/cities/:id/trains') do
   @city = City.find(params[:id].to_i())
-  train = Train.new({:destination => params[:destination_input], :city_id => @city.id, :id => nil, :time => params[:time_input]})
+  train = Train.new({:destination => params[:destination_input], :city_id => @city.id, :id => nil, :time => params[:time_input], :time2 => params[:time2_input], :time3 => params[:time3_input]})
   train.save()
   erb(:city)
 end
@@ -92,4 +109,25 @@ delete('/cities/:id/trains/:train_id') do
   train.delete
   @city = City.find(params[:id].to_i())
   redirect to('/cities/' + params[:id])
+end
+
+get('/user_cities/:id/user_trains/:train_id') do
+  @train = Train.find(params[:train_id].to_i())
+  erb(:user_train)
+end
+
+post('/user_cities/:id/user_trains/:train_id/ticket') do
+  @city = City.find(params[:id].to_i())
+  @trains = Train.new({:destination => params[:destination_input], :city_id => @city.id, :id => nil, :time => params[:user_time_input]})
+  @train = Train.find(params[:train_id].to_i())
+  erb(:ticket)
+end
+
+
+
+
+get("/destroy") do
+  @city = City.clear
+  @train = Train.clear
+  redirect to('/cities')
 end

@@ -1,10 +1,12 @@
 class Train
-  attr_accessor :destination, :id, :time, :city_id
+  attr_accessor :destination, :id, :time, :time2, :time3, :city_id
 
   def initialize(attributes)
     @destination = attributes.fetch(:destination)
     @id = attributes.fetch(:id)
-    @time = attributes.fetch(:time, nil) 
+    @time = attributes.fetch(:time, nil)
+    @time2 = attributes.fetch(:time2, nil)
+    @time3 = attributes.fetch(:time3, nil)
     @city_id = attributes.fetch(:city_id)
   end
 
@@ -25,13 +27,15 @@ class Train
       city_id = train.fetch("city_id").to_i
       id = train.fetch("id").to_i
       time = train.fetch("time")
-      trains.push(Train.new({:destination => destination, :city_id => city_id, :id => id, :time => time}))
+      time2 = train.fetch("time2")
+      time3 = train.fetch("time3")
+      trains.push(Train.new({:destination => destination, :city_id => city_id, :id => id, :time => time, :time2 => time2, :time3 => time3}))
     end
     trains
   end
 
   def save
-    result = DB.exec("INSERT INTO trains (destination, city_id, time) VALUES ('#{@destination}', '#{@city_id}', '#{@time}') RETURNING id;")
+    result = DB.exec("INSERT INTO trains (destination, city_id, time, time2, time3) VALUES ('#{@destination}', '#{@city_id}', '#{@time}', '#{@time2}', '#{@time3}') RETURNING id;")
     @id = result.first().fetch("id").to_i
   end
 
@@ -42,7 +46,9 @@ class Train
       city_id = train.fetch("city_id").to_i
       id = train.fetch("id").to_i
       time = train.fetch("time")
-      Train.new({:destination => destination, :city_id => city_id, :id => id, :time => time})
+      time2 = train.fetch('time2')
+      time3 = train.fetch('time3')
+      Train.new({:destination => destination, :city_id => city_id, :id => id, :time => time, :time2 => time2, :time3 => time3})
     else
       nil
     end
@@ -65,9 +71,15 @@ class Train
       destination = train.fetch("destination")
       id = train.fetch("id").to_i
       time = train.fetch('time')
-      trains.push(Train.new({:destination => destination, :city_id => city_id, :id => id, :time => time}))
+      time2 = train.fetch('time2')
+      time3 = train.fetch('time3')
+      trains.push(Train.new({:destination => destination, :city_id => city_id, :id => id, :time => time, :time2 => time2, :time3 => time3}))
     end
     trains
+  end
+
+  def self.clear
+    DB.exec("DELETE FROM trains *;")
   end
 
   def city

@@ -56,6 +56,10 @@ def self.search(x)
   cities.select {|e| /#{x}/i.match? e.name}
 end
 
+def self.clear
+  DB.exec("DELETE FROM cities *;")
+end
+
 def trains
   Train.find_by_city(self.id)
 end
