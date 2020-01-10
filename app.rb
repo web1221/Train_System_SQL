@@ -112,6 +112,7 @@ post('/user_cities/:id/user_trains/:train_id/ticket') do
   @city = City.find(params[:id].to_i())
   @trains = Train.new({:destination => params[:destination_input], :city_id => @city.id, :id => nil, :time => params[:user_time_input]})
   @train = Train.find(params[:train_id].to_i())
+  binding.pry
   erb(:ticket)
 end
 
